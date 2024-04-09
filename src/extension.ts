@@ -1,26 +1,52 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+
+import { SidebarProvider } from "./utils/webviewUtils";
+
+
 export function activate(context: vscode.ExtensionContext) {
+	console.log('Congratulations, your extension "cstarsx" is now active!');
+    // 注册一个命令，用于打开侧边栏中的输入窗口
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "cstarx" is now active!');
+	const sidebarPanel = new SidebarProvider(context);
+	context.subscriptions.push(
+		vscode.window.registerWebviewViewProvider('vs-sidebar-view', sidebarPanel)
+	);
+	
+    // let disposable = vscode.commands.registerCommand('cstarsx.createInput', () => {
+    //     // 创建一个 Webview 面板
+    //     const panel = vscode.window.createWebviewPanel(
+    //         'inputPanel', // 面板的唯一标识符
+    //         'Input Panel', // 面板的标题
+    //         vscode.ViewColumn.One, // 面板要显示的位置
+    //         {
+    //             enableScripts: true // 允许执行 JavaScript
+    //         } // 面板的其他属性
+    //     );
+		
+    //     // 加载 HTML 内容到 Webview 面板中
+    //     panel.webview.html = getWebviewContent(panel.webview);
+	// 	// 接收来自 Webview 的消息
+	// 	panel.webview.onDidReceiveMessage(
+	// 		message => {
+	// 			switch (message.command) {
+	// 				case 'saveInput':
+	// 					// vscode.window.showErrorMessage(message.input);
+	// 					saveInput(message.input);
+	// 					// call the python executable file
+	// 					callpython();
+	// 					printOutput(panel.webview);
+	// 					return;
+	// 				case 'refresh':
+	// 					printOutput(panel.webview);
+	// 					return;
+	// 			}
+	// 		}, 
+	// 		undefined,
+	// 		context.subscriptions
+	// 		);
+	// });
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('cstarx.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from cstarx!');
-	});
-
-	context.subscriptions.push(disposable);
+    // context.subscriptions.push(disposable);
+	console.log("activate function done.");
 }
-
-// This method is called when your extension is deactivated
-export function deactivate() {}

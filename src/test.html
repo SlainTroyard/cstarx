@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Panel</title>
+</head>
+<body>
+    <h1>Input Panel</h1>
+    <textarea id="inputField" rows="20" cols="50"></textarea><br>
+    <button id="Translate_buttom">Translate</button>
+    <button id="Refresh_buttom">Refresh</button>
+    <h1>Output Panel</h1>
+    <textarea id="outputField" rows="20" cols="50"></textarea><br>
+    <script nonce="${nonce}">
+        document.getElementById("Translate_buttom").addEventListener("click", saveInput);
+        document.getElementById("Refresh_buttom").addEventListener("click", refresh);
+        function saveInput() {
+            const vscode = acquireVsCodeApi();	
+            const input = document.getElementById('inputField').value;
+            vscode.postMessage({
+                command: 'saveInput',
+                input: input
+            });
+        }
+        function refresh() {
+            const vscode = acquireVsCodeApi();	
+            vscode.postMessage({
+                command: 'refresh'
+            });
+        }
+        window.addEventListener('message', event => {
+                    const message = event.data;
+                    if (message.command === 'received_content') {
+                        const fileContent = message.content;
+                        document.getElementById('outputField').value = fileContent;
+                    }
+                });
+    </script>
+</body>
+</html>
