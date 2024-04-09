@@ -3,6 +3,10 @@
   "displayName": "cstarsx",
   "description": "Convert c/cpp code to rust",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SlainTroyard/cstarx"
+  },
   "engines": {
     "vscode": "^1.87.0"
   },
