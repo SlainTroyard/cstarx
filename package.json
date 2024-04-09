@@ -1,0 +1,69 @@
+{
+  "name": "cstarsx",
+  "displayName": "cstarsx",
+  "description": "Convert c/cpp code to rust",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.87.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "files": [
+    "trans/c2rust_test/",
+    "trans/compile_test/",
+    "trans/input/",
+    "trans/inputall/",
+    "trans/results/",
+    "trans/success/",
+    "trans/",
+    "cstar.png"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cstarsx.createInput",
+        "title": "CreateInput"
+      }
+    ],
+    "views": {
+      "vs-sidebar-view": [
+        {
+          "type": "webview",
+          "id": "vs-sidebar-view",
+          "name": "demo page"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vs-sidebar-view",
+          "title": "Cstarx",
+          "icon": "cstar.png"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.87.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-cli": "^0.0.8",
+    "@vscode/test-electron": "^2.3.9"
+  }
+}
