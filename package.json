@@ -1,8 +1,9 @@
 {
-  "name": "cstarsx",
-  "displayName": "cstarsx",
+  "name": "CStarX",
+  "displayName": "CStarX",
   "description": "Convert c/cpp code to rust",
   "version": "0.0.1",
+  "publisher": "CStarX",
   "repository": {
     "type": "git",
     "url": "https://github.com/SlainTroyard/cstarx"
