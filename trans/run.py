@@ -51,7 +51,7 @@ def process_file_double(input_content, temp_prm, top_p_prm):
         messages=[
             {"role": "user", "content": input_content},
             {"role": "assistant", "content": first_round_output},
-            {"role": "user", "content": "用一份完整的Rust代码实现它"}
+            {"role": "user", "content": "用一份可编译的完整Rust代码实现它"}
         ],
         temperature = temp_prm,
         top_p = top_p_prm,
