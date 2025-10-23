@@ -6,11 +6,25 @@ from zhipuai import ZhipuAI
 import concurrent.futures
 import uuid  
 
-# api_key = "2e4f120e27fb6f422beaef42f99347cd.qX6XNs5OVfKWVeSV"
-api_key = ""
-with open("api_key", "r") as f:
-    # Only read the first line of the file
-    api_key = f.read().splitlines()[0]
+# 从环境变量 "ZHIPUAI_API_KEY" 中读取 API Key
+api_key = os.environ.get("ZHIPUAI_API_KEY")
+if not api_key:
+    # 如果环境变量没有设置，则尝试从 'api_key' 文件读取
+    print("ZHIPUAI_API_KEY not set, trying to read from 'api_key' file...")
+    try:
+        with open("api_key", "r") as f:
+            api_key = f.read().splitlines()[0]
+    except FileNotFoundError:
+        print("Error: 'api_key' file not found.")
+        print("Please set the ZHIPUAI_API_KEY environment variable or create an 'api_key' file.")
+        exit(1) # 退出脚本，因为没有key无法继续
+    except IndexError:
+        print("Error: 'api_key' file is empty.")
+        exit(1)
+
+if not api_key:
+    print("Error: API Key is empty. Please check your environment variable or 'api_key' file.")
+    exit(1)
 
 client = ZhipuAI(api_key=api_key)
 
